@@ -1,0 +1,365 @@
+@import "tailwindcss";
+
+/* ───────────────────────────────────────────────────────────────
+   DESIGN TOKENS — HUELE A PARRILLA
+   Paleta oficial. No existe ningún token verde: los estados de éxito,
+   advertencia y error se resuelven con carbón, cobre, cuero y rojo de marca,
+   siempre acompañados de icono y texto.
+   ─────────────────────────────────────────────────────────────── */
+@theme {
+  --color-charcoal: #1f1e1c;
+  --color-charcoal-soft: #2b2925;
+  --color-charcoal-muted: #4a4640;
+  --color-ivory: #f5f0e7;
+  --color-ivory-deep: #efe8dc;
+  --color-cream: #e8ded0;
+  --color-leather: #744b34;
+  --color-copper: #b56f42;
+  --color-brand: #d93624;
+  --color-brand-dark: #b52a1a;
+
+  --font-display: var(--font-display-loaded), "DM Serif Display",
+    "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-sans-loaded), "Manrope", "Inter", ui-sans-serif,
+    system-ui, sans-serif;
+
+  --radius-card: 14px;
+  --radius-field: 10px;
+  --radius-button: 9px;
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Los anclajes no deben quedar bajo el header fijo. */
+    scroll-padding-top: 92px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-charcoal);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    /* Textura de papel apenas perceptible: aporta calidez sin volverse rústica. */
+    background-image:
+      radial-gradient(rgba(116, 75, 52, 0.045) 0.5px, transparent 0.5px),
+      radial-gradient(rgba(31, 30, 28, 0.03) 0.5px, transparent 0.5px);
+    background-size: 22px 22px, 34px 34px;
+    background-position: 0 0, 11px 17px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: rgba(217, 54, 36, 0.18);
+  }
+}
+
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .container-page {
+      padding-inline: 2rem;
+    }
+  }
+
+  .container-editorial {
+    max-width: 42rem;
+  }
+
+  /* Tipografía de secciones */
+  .display-1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 7vw, 4.25rem);
+    line-height: 1.04;
+  }
+
+  .display-2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 4.4vw, 2.9rem);
+    line-height: 1.1;
+  }
+
+  .display-3 {
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 2.4vw, 1.6rem);
+    line-height: 1.2;
+  }
+
+  .eyebrow {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-copper);
+  }
+
+  .price {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-charcoal);
+  }
+
+  /* Botones */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    border-radius: var(--radius-button);
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+    padding: 0.8rem 1.4rem;
+    transition:
+      background-color 180ms ease,
+      color 180ms ease,
+      border-color 180ms ease,
+      transform 180ms ease;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  .btn-primary {
+    background-color: var(--color-brand);
+    color: #fff;
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background-color: var(--color-brand-dark);
+  }
+
+  .btn-charcoal {
+    background-color: var(--color-charcoal);
+    color: var(--color-ivory);
+  }
+
+  .btn-charcoal:hover:not(:disabled) {
+    background-color: var(--color-charcoal-soft);
+  }
+
+  .btn-outline {
+    background-color: transparent;
+    color: var(--color-charcoal);
+    border: 1px solid rgba(31, 30, 28, 0.35);
+  }
+
+  .btn-outline:hover:not(:disabled) {
+    border-color: var(--color-charcoal);
+    background-color: rgba(31, 30, 28, 0.05);
+  }
+
+  .btn-outline-light {
+    background-color: transparent;
+    color: var(--color-ivory);
+    border: 1px solid rgba(245, 240, 231, 0.45);
+  }
+
+  .btn-outline-light:hover:not(:disabled) {
+    border-color: var(--color-ivory);
+    background-color: rgba(245, 240, 231, 0.1);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-leather);
+    padding: 0.35rem 0.5rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+
+  .btn-ghost:hover:not(:disabled) {
+    color: var(--color-brand);
+    text-decoration: underline;
+  }
+
+  /* Tarjetas */
+  .card {
+    background-color: #fbf8f2;
+    border: 1px solid rgba(116, 75, 52, 0.16);
+    border-radius: var(--radius-card);
+    transition:
+      border-color 200ms ease,
+      box-shadow 200ms ease;
+  }
+
+  .card-hover:hover {
+    border-color: rgba(181, 111, 66, 0.55);
+    box-shadow: 0 6px 22px -14px rgba(31, 30, 28, 0.45);
+  }
+
+  .panel {
+    background-color: var(--color-cream);
+    border: 1px solid rgba(116, 75, 52, 0.18);
+    border-radius: var(--radius-card);
+  }
+
+  /* Formularios */
+  .field-label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--color-charcoal);
+    margin-bottom: 0.35rem;
+  }
+
+  .field-hint {
+    font-size: 0.76rem;
+    color: var(--color-charcoal-muted);
+  }
+
+  .field-input {
+    width: 100%;
+    background-color: #fffdf9;
+    border: 1px solid rgba(116, 75, 52, 0.28);
+    border-radius: var(--radius-field);
+    padding: 0.68rem 0.85rem;
+    font-size: 0.95rem;
+    color: var(--color-charcoal);
+    transition:
+      border-color 160ms ease,
+      box-shadow 160ms ease;
+  }
+
+  .field-input::placeholder {
+    color: rgba(74, 70, 64, 0.55);
+  }
+
+  .field-input:focus {
+    outline: none;
+    border-color: var(--color-copper);
+    box-shadow: 0 0 0 3px rgba(181, 111, 66, 0.16);
+  }
+
+  .field-input[aria-invalid="true"] {
+    border-color: var(--color-brand);
+    box-shadow: 0 0 0 3px rgba(217, 54, 36, 0.12);
+  }
+
+  .field-error {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.35rem;
+    margin-top: 0.35rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--color-brand-dark);
+  }
+
+  /* Avisos de estado — sin verde en ningún caso */
+  .notice {
+    display: flex;
+    gap: 0.7rem;
+    align-items: flex-start;
+    border-radius: var(--radius-field);
+    padding: 0.85rem 1rem;
+    font-size: 0.87rem;
+    border: 1px solid;
+  }
+
+  .notice-confirm {
+    background-color: rgba(31, 30, 28, 0.04);
+    border-color: rgba(31, 30, 28, 0.2);
+    color: var(--color-charcoal);
+  }
+
+  .notice-warning {
+    background-color: rgba(181, 111, 66, 0.1);
+    border-color: rgba(181, 111, 66, 0.4);
+    color: #6b3f1e;
+  }
+
+  .notice-alert {
+    background-color: rgba(217, 54, 36, 0.07);
+    border-color: rgba(217, 54, 36, 0.35);
+    color: #8e2416;
+  }
+
+  .notice-info {
+    background-color: rgba(116, 75, 52, 0.06);
+    border-color: rgba(116, 75, 52, 0.2);
+    color: var(--color-charcoal-muted);
+  }
+
+  .section {
+    padding-block: clamp(3.5rem, 7vw, 6rem);
+  }
+
+  .hairline {
+    border-top: 1px solid rgba(116, 75, 52, 0.18);
+  }
+}
+
+@layer utilities {
+  .animate-rise {
+    animation: rise 260ms ease-out;
+  }
+
+  .animate-fade {
+    animation: fade 200ms ease-out;
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
