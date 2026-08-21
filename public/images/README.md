@@ -1,22 +1,42 @@
 # Imágenes del sitio
 
-Coloca aquí los archivos definitivos. Mientras un archivo no exista, la página
-muestra automáticamente un respaldo con los colores de la marca: **nunca se
-genera una imagen artificial ni se usa una fotografía de stock**.
+Coloca aquí los archivos definitivos **con exactamente estos nombres**. Mientras
+un archivo no exista, la página muestra automáticamente un respaldo con los
+colores de la marca: **nunca se genera una imagen artificial ni se usa una
+fotografía de stock**.
 
-| Archivo | Dónde aparece | Recomendación |
+| Archivo | Dónde aparece | Qué foto va aquí |
 |---|---|---|
-| `logo-huele-a-parrilla.png` | Header, hero, footer y páginas legales | PNG con fondo transparente. Sin este archivo se muestra el nombre en tipografía de marca. |
-| `hero-campo-sur.jpg` | Fotografía principal del hero | Horizontal, mín. 2000 px de ancho. Corte real en primer plano con el campo del sur de fondo. Es la imagen más pesada del sitio: exportarla optimizada (idealmente `.webp`). |
-| `editorial-cortes.jpg` | Franja "Cortes seleccionados" | Vertical u horizontal, mín. 1200 px. |
-| `editorial-origen.jpg` | Franja "Del sur de Chile a tu mesa" | Ídem. |
-| `editorial-preparacion.jpg` | Franja "Preparados especialmente para ti" | Ídem. |
-| `cta-parrilla.jpg` | Sección final "Tu próxima parrilla comienza aquí" | Horizontal, mín. 1600 px. |
+| `logo-huele-a-parrilla.png` | Header, hero, footer y páginas legales | El logo oficial (llama roja + tipografía). PNG con fondo transparente. |
+| `hero-campo-sur.jpg` | Fotografía principal de la portada | La foto más ambiental y luminosa: carne al aire libre, con pasto o entorno de campo. Es la imagen más pesada del sitio, conviene exportarla optimizada. |
+| `editorial-cortes.jpg` | Franja "Cortes seleccionados" | Un corte limpio y bien presentado, por ejemplo sobre fondo blanco. |
+| `editorial-origen.jpg` | Franja "Del sur de Chile a tu mesa" | Otra pieza entera, presentada con la misma limpieza. |
+| `editorial-preparacion.jpg` | Franja "Preparados especialmente para ti" | Un corte sobre tabla de madera o superficie de trabajo. |
+| `cta-parrilla.jpg` | Sección final "Tu próxima parrilla comienza aquí" | La foto más dramática y apetitosa: corte grande, luz cálida. |
+
+Cambiar la asignación es solo cambiar el nombre del archivo: si prefieres otra
+foto en la portada, renómbrala a `hero-campo-sur.jpg` y listo.
+
+## Formatos y peso
+
+- `.jpg` para fotografías, `.png` para el logo (necesita transparencia).
+- La portada conviene que tenga al menos 2000 px de ancho; las franjas
+  editoriales, 1200 px.
+- Exporta las fotos comprimidas: son lo único que puede volver lenta la página.
+
+## Cómo se comportan las fotos en el diseño
+
+Sobre cada fotografía se aplica un velo oscuro de la paleta de marca. Está
+calibrado para que el texto blanco se lea **tanto sobre fotos claras** (un corte
+sobre fondo blanco o mármol) **como sobre fotos oscuras** (una tabla de madera
+sobre granito), y para que ambas convivan en la misma franja sin que una parezca
+apagada al lado de la otra. No hace falta que edites las fotos para oscurecerlas.
 
 ## Reglas de uso
 
-- **El catálogo no lleva fotografías.** Las imágenes de esta carpeta son material
-  editorial de marca: no deben usarse como foto de un producto concreto.
+- **El catálogo no lleva fotografías.** Las imágenes de esta carpeta son
+  material editorial de marca: no deben usarse como foto de un producto
+  concreto ni como miniatura de una tarjeta.
 - Si en el futuro se agregan fotos de producto, se cargan en `data/products.ts`
   cambiando `image: null` por la ruta del archivo. La interfaz ya está preparada
   para mostrarlas sin modificar ninguna otra lógica.

@@ -4,21 +4,33 @@ import type { ReactNode } from "react";
 
 import { useImageAvailability } from "@/hooks/useImageAvailability";
 
+/**
+ * - `hero`: oscurece el costado del titular además del borde inferior, para que
+ *   el texto se lea sobre cualquier fotografía.
+ * - `caption`: banda inferior sólida bajo el texto de las franjas editoriales.
+ * - `center`: oscurecimiento parejo, para bloques con el texto centrado.
+ */
+type OverlayVariant = "hero" | "caption" | "center";
+
 interface EditorialImageProps {
   src: string;
   alt: string;
   children?: ReactNode;
   className?: string;
   priority?: boolean;
-  overlay?: "soft" | "strong";
+  overlay?: OverlayVariant;
 }
 
 /**
  * Fotografía editorial de marca.
  *
  * Las fotografías reales se colocan en `public/images/`. Mientras un archivo no
- * exista, se muestra un fondo de la paleta: nunca se genera una imagen falsa ni
+ * exista se muestra un fondo de la paleta: nunca se genera una imagen falsa ni
  * se usa un placeholder de stock.
+ *
+ * Los veladores están calculados para funcionar con fotografías claras (cortes
+ * sobre fondo blanco o mármol) y oscuras (tabla de madera, parrilla) por igual,
+ * de modo que el texto conserve el contraste sin importar qué imagen se cargue.
  */
 export function EditorialImage({
   src,
@@ -26,7 +38,7 @@ export function EditorialImage({
   children,
   className = "",
   priority = false,
-  overlay = "soft",
+  overlay = "caption",
 }: EditorialImageProps) {
   const { ref, missing, onError } = useImageAvailability();
 
@@ -50,14 +62,33 @@ export function EditorialImage({
           className="absolute inset-0 h-full w-full object-cover"
         />
       )}
-      <div
-        aria-hidden
-        className={`absolute inset-0 ${
-          overlay === "strong"
-            ? "bg-gradient-to-t from-charcoal via-charcoal/70 to-charcoal/25"
-            : "bg-gradient-to-t from-charcoal/90 via-charcoal/45 to-charcoal/10"
-        }`}
-      />
+
+      {/* Tinte base: iguala fotografías de luminosidad muy distinta, de modo
+          que un corte sobre fondo blanco y otro sobre tabla oscura convivan en
+          la misma franja sin que una parezca apagada al lado de la otra. */}
+      <div aria-hidden className="absolute inset-0 bg-charcoal/45" />
+
+      {overlay === "center" ? (
+        <div aria-hidden className="absolute inset-0 bg-charcoal/55" />
+      ) : overlay === "hero" ? (
+        <>
+          {/* En escritorio el titular vive a la izquierda. */}
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/80 to-charcoal/10"
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/45 to-transparent"
+          />
+        </>
+      ) : (
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/85 via-40% to-transparent"
+        />
+      )}
+
       {children ? <div className="relative">{children}</div> : null}
     </div>
   );

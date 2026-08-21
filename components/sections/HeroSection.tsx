@@ -22,9 +22,9 @@ export function HeroSection() {
     <section id="inicio" className="relative isolate">
       <EditorialImage
         src="/images/hero-campo-sur.jpg"
-        alt="Corte de carne fresca sobre tabla, con el campo del sur de Chile al fondo"
+        alt="Corte de carne fresca de Huele a Parrilla"
         priority
-        overlay="strong"
+        overlay="hero"
         className="min-h-[620px] pt-[68px] sm:min-h-[660px] lg:min-h-[720px]"
       >
         <div className="container-page flex min-h-[552px] flex-col justify-center py-16 sm:min-h-[592px] lg:min-h-[652px]">

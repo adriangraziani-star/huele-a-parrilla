@@ -9,7 +9,7 @@ export function FinalCTASection() {
       <EditorialImage
         src="/images/cta-parrilla.jpg"
         alt="Carne a la parrilla"
-        overlay="strong"
+        overlay="center"
         className="min-h-[380px]"
       >
         <div className="container-page flex min-h-[380px] flex-col items-center justify-center py-16 text-center">
