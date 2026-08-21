@@ -24,6 +24,27 @@ foto en la portada, renómbrala a `hero-campo-sur.jpg` y listo.
   editoriales, 1200 px.
 - Exporta las fotos comprimidas: son lo único que puede volver lenta la página.
 
+## Cómo están integradas hoy
+
+| Archivo | Fotografía actual |
+|---|---|
+| `logo-huele-a-parrilla.png` | Logo oficial |
+| `hero-campo-sur.jpg` | Entraña en plato, al aire libre |
+| `editorial-cortes.jpg` | Entrecot con hueso |
+| `editorial-origen.jpg` | Flat iron sobre mármol |
+| `editorial-preparacion.jpg` | Tomahawk sobre tabla |
+| `cta-parrilla.jpg` | Tomahawk sobre tabla |
+
+Todas fueron reescaladas y recomprimidas: las originales sumaban unos 27 MB, lo
+que habría hecho la página muy lenta. Al recodificarlas también se eliminó la
+metadata de las fotos de teléfono, que incluía **coordenadas GPS** del lugar
+donde fueron tomadas. Si más adelante reemplazas alguna, conviene repetir ese
+paso antes de publicarla.
+
+Cuando una foto vertical se muestra en una franja apaisada, el recorte se
+controla con la propiedad `focus` del componente `EditorialImage`
+(por ejemplo `focus="center 30%"` para que se vea la carne y no la tabla).
+
 ## Cómo se comportan las fotos en el diseño
 
 Sobre cada fotografía se aplica un velo oscuro de la paleta de marca. Está

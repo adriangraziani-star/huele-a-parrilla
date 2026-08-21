@@ -10,6 +10,7 @@ export function FinalCTASection() {
         src="/images/cta-parrilla.jpg"
         alt="Carne a la parrilla"
         overlay="center"
+        focus="center 28%"
         className="min-h-[380px]"
       >
         <div className="container-page flex min-h-[380px] flex-col items-center justify-center py-16 text-center">

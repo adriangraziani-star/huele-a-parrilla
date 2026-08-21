@@ -18,9 +18,9 @@ interface BrandLogoProps {
 const LOGO_SRC = "/images/logo-huele-a-parrilla.png";
 
 const sizeClass = {
-  sm: "h-9",
-  md: "h-12",
-  lg: "h-20 sm:h-24",
+  sm: "h-12",
+  md: "h-14",
+  lg: "h-24 sm:h-28",
 };
 
 const wordmarkSize = {

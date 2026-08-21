@@ -19,22 +19,31 @@ const trustPoints = [
 
 export function HeroSection() {
   return (
-    <section id="inicio" className="relative isolate">
-      <EditorialImage
-        src="/images/hero-campo-sur.jpg"
-        alt="Corte de carne fresca de Huele a Parrilla"
-        priority
-        overlay="hero"
-        className="min-h-[620px] pt-[68px] sm:min-h-[660px] lg:min-h-[720px]"
-      >
-        <div className="container-page flex min-h-[552px] flex-col justify-center py-16 sm:min-h-[592px] lg:min-h-[652px]">
-          <div className="max-w-2xl">
-            <BrandLogo variant="light" size="lg" className="mb-8" />
+    <section id="inicio" className="relative isolate bg-charcoal">
+      {/*
+        Móvil: la fotografía es el fondo y el texto se apoya encima.
+        Escritorio: composición partida — titular a la izquierda, fotografía a
+        la derecha. Así una foto vertical se muestra completa en vez de quedar
+        recortada en un primer plano cerrado.
+      */}
+      <div className="relative lg:grid lg:grid-cols-[1.12fr_0.88fr]">
+        <EditorialImage
+          src="/images/hero-campo-sur.jpg"
+          alt="Corte de carne fresca de Huele a Parrilla"
+          priority
+          overlay="hero"
+          className="absolute inset-0 lg:relative lg:col-start-2 lg:row-start-1 lg:min-h-[700px]"
+        />
 
-            <h1 className="display-1 text-ivory">
-              Carne fresca del sur,
-              <br />
-              <span className="text-brand">directo a tu puerta.</span>
+        <div className="relative lg:col-start-1 lg:row-start-1">
+          <div className="container-page flex min-h-[620px] flex-col justify-center pt-[68px] pb-16 sm:min-h-[660px] lg:mx-0 lg:min-h-[700px] lg:max-w-[46rem] lg:pr-14 lg:pl-[max(2rem,calc((100vw-1280px)/2+2rem))]">
+            <BrandLogo variant="light" size="lg" className="mb-8 self-start" />
+
+            {/* Cada frase en su propia línea: el titular nunca debe partirse
+                a mitad de idea al cambiar el ancho de la columna. */}
+            <h1 className="display-1 text-ivory lg:text-[clamp(2.6rem,4.4vw,3.55rem)]">
+              <span className="block">Carne fresca del sur,</span>
+              <span className="block text-brand">directo a tu puerta.</span>
             </h1>
 
             <p className="mt-6 max-w-xl text-[1.05rem] leading-relaxed text-ivory/80">
@@ -61,7 +70,7 @@ export function HeroSection() {
             </div>
           </div>
         </div>
-      </EditorialImage>
+      </div>
 
       {/* Elementos de confianza */}
       <div className="border-b border-leather/15 bg-ivory">
