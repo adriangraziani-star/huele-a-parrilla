@@ -195,22 +195,30 @@ la toma automáticamente.
 
 Desde ahí, cada cambio que se suba a la rama principal se publica solo.
 
-### Después de la primera publicación
+No hace falta un dominio propio: Vercel entrega una dirección terminada en
+`.vercel.app`, con HTTPS incluido, que sirve para compartir el sitio, publicarlo
+en redes sociales y usarlo en publicidad.
 
-Agrega la variable de entorno `NEXT_PUBLIC_SITE_URL` con la dirección
-definitiva (**Settings → Environment Variables**) y vuelve a publicar. Es lo que
-hace que, al pegar el enlace en WhatsApp o Instagram, aparezca la vista previa
-con la fotografía en vez de un enlace pelado. También alimenta el `sitemap.xml`
-que lee Google.
+### La dirección del sitio se resuelve sola
 
-```
-NEXT_PUBLIC_SITE_URL = https://hueleaparrilla.cl
-```
+`data/business.ts` determina la dirección pública en este orden:
 
-### Dominio propio
+1. `NEXT_PUBLIC_SITE_URL`, si se define — es lo que se usa al conectar un
+   dominio propio.
+2. La dirección de producción que Vercel expone al compilar, de modo que las
+   vistas previas y el `sitemap.xml` queden correctos **sin configurar nada**.
+3. `http://localhost:3000` durante el desarrollo.
+
+Nunca se escribe un dominio a mano en el código: inventar uno que todavía no
+existe produce enlaces rotos en Google y vistas previas que no cargan.
+
+### Dominio propio, más adelante
 
 En **Settings → Domains** se conecta el dominio y Vercel indica qué registros
-DNS crear donde esté comprado. El certificado HTTPS lo emite y renueva solo.
+DNS crear donde esté comprado; el certificado HTTPS lo emite y renueva solo.
+Conviene además definir `NEXT_PUBLIC_SITE_URL` con ese dominio en
+**Settings → Environment Variables** y volver a publicar, para que las
+direcciones absolutas apunten al dominio definitivo y no al `.vercel.app`.
 
 ### Verificado antes de publicar
 

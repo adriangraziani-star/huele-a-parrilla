@@ -1,3 +1,21 @@
+const stripTrailingSlashes = (url: string): string => url.replace(/\/+$/, "");
+
+/** Ver la nota de `siteUrl`. */
+function resolveSiteUrl(): string {
+  const explicit = process.env.NEXT_PUBLIC_SITE_URL;
+  if (explicit && explicit.trim().length > 0) {
+    return stripTrailingSlashes(explicit.trim());
+  }
+
+  // Vercel expone la dirección de producción del proyecto al compilar.
+  const vercel = process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL;
+  if (vercel && vercel.trim().length > 0) {
+    return stripTrailingSlashes(`https://${vercel.trim()}`);
+  }
+
+  return "http://localhost:3000";
+}
+
 /**
  * Configuración general del negocio.
  * Fuente única: no repetir el número de WhatsApp, los días ni el horario en
@@ -7,13 +25,18 @@ export const businessConfig = {
   name: "Huele a Parrilla",
   /**
    * Dirección pública del sitio. Se usa para las URL absolutas que necesitan
-   * Google y las vistas previas al compartir el enlace por WhatsApp.
-   * Se define en la variable de entorno NEXT_PUBLIC_SITE_URL al publicar.
+   * Google y la vista previa que aparece al compartir el enlace.
+   *
+   * Se resuelve sola, en este orden:
+   * 1. NEXT_PUBLIC_SITE_URL, cuando ya existe un dominio propio.
+   * 2. La dirección que asigna Vercel al publicar, de modo que el sitio
+   *    funcione correctamente sin configurar nada.
+   * 3. El servidor local, durante el desarrollo.
+   *
+   * Nunca se escribe aquí un dominio a mano: mientras no exista uno confirmado,
+   * inventarlo generaría enlaces rotos en Google y en las vistas previas.
    */
-  siteUrl: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://hueleaparrilla.cl").replace(
-    /\/+$/,
-    "",
-  ),
+  siteUrl: resolveSiteUrl(),
   tagline: "Carne fresca del sur, directo a tu puerta.",
   /** Número normalizado para wa.me (sin +, sin espacios, sin guiones). */
   whatsapp: "56930169902",
