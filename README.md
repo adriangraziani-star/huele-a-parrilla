@@ -176,6 +176,47 @@ credenciales correspondientes. Nunca se envían datos personales.
 
 ---
 
+---
+
+## Publicar la página en internet
+
+El proyecto está listo para Vercel sin configuración adicional: detecta Next.js
+solo, y el repositorio tiene una única rama que además es la principal, así que
+la toma automáticamente.
+
+### Primera publicación
+
+1. Entra a **vercel.com** e inicia sesión con la cuenta de GitHub.
+2. **Add New → Project** e importa `adriangraziani-star/huele-a-parrilla`.
+3. No cambies nada en la pantalla de configuración: el framework, el comando de
+   compilación y la carpeta de salida se detectan solos.
+4. **Deploy**. En un par de minutos queda en línea en una dirección terminada
+   en `.vercel.app`.
+
+Desde ahí, cada cambio que se suba a la rama principal se publica solo.
+
+### Después de la primera publicación
+
+Agrega la variable de entorno `NEXT_PUBLIC_SITE_URL` con la dirección
+definitiva (**Settings → Environment Variables**) y vuelve a publicar. Es lo que
+hace que, al pegar el enlace en WhatsApp o Instagram, aparezca la vista previa
+con la fotografía en vez de un enlace pelado. También alimenta el `sitemap.xml`
+que lee Google.
+
+```
+NEXT_PUBLIC_SITE_URL = https://hueleaparrilla.cl
+```
+
+### Dominio propio
+
+En **Settings → Domains** se conecta el dominio y Vercel indica qué registros
+DNS crear donde esté comprado. El certificado HTTPS lo emite y renueva solo.
+
+### Verificado antes de publicar
+
+Un clon limpio del repositorio instala con `npm ci` y compila con `npm run build`
+sin errores ni advertencias, que es exactamente lo que ejecuta el servidor.
+
 ## Contenido pendiente
 
 Estos elementos quedan intencionalmente a la espera de material oficial. La

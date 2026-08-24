@@ -2,6 +2,9 @@
   "name": "huele-a-parrilla",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": ">=20"
+  },
   "description": "Carnicería digital chilena — catálogo, cotizador y solicitud de pedido por WhatsApp.",
   "scripts": {
     "dev": "next dev",
