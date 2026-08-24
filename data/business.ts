@@ -5,6 +5,15 @@
  */
 export const businessConfig = {
   name: "Huele a Parrilla",
+  /**
+   * Dirección pública del sitio. Se usa para las URL absolutas que necesitan
+   * Google y las vistas previas al compartir el enlace por WhatsApp.
+   * Se define en la variable de entorno NEXT_PUBLIC_SITE_URL al publicar.
+   */
+  siteUrl: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://hueleaparrilla.cl").replace(
+    /\/+$/,
+    "",
+  ),
   tagline: "Carne fresca del sur, directo a tu puerta.",
   /** Número normalizado para wa.me (sin +, sin espacios, sin guiones). */
   whatsapp: "56930169902",

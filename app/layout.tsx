@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { DM_Serif_Display, Manrope } from "next/font/google";
 
 import { Providers } from "@/app/providers";
+import { businessConfig } from "@/data/business";
 import "@/app/globals.css";
 
 const displayFont = DM_Serif_Display({
@@ -18,6 +19,9 @@ const sansFont = Manrope({
 });
 
 export const metadata: Metadata = {
+  // Base para las URL absolutas de Open Graph: es lo que hace que al pegar el
+  // enlace en WhatsApp aparezca la vista previa con la imagen.
+  metadataBase: new URL(businessConfig.siteUrl),
   title: "Huele a Parrilla | Carnes frescas a domicilio en Santiago",
   description:
     "Carnes frescas provenientes del sur de Chile, preparadas a tu gusto y despachadas directamente a tu hogar en Santiago.",
@@ -36,7 +40,17 @@ export const metadata: Metadata = {
     siteName: "Huele a Parrilla",
     locale: "es_CL",
     type: "website",
+    url: "/",
+    images: [
+      {
+        url: "/images/hero-campo-sur.jpg",
+        width: 2200,
+        height: 2933,
+        alt: "Corte de carne fresca de Huele a Parrilla",
+      },
+    ],
   },
+  alternates: { canonical: "/" },
   robots: { index: true, follow: true },
 };
 
